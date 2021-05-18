@@ -2,8 +2,6 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
 }
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.3079791413'
 def buglySdkVersion = "2.1.9"
 def buglyNdkVersion = "3.0"
 android {
