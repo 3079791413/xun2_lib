@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+def buglySdkVersion = "2.1.9"
+def buglyNdkVersion = "3.0"
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi','x86','x86_64' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation files('libs\\umeng-share-QQ-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-share-sina-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-share-wechat-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
+    implementation files('libs\\umeng-sharetool-6.9.6.jar')
+    implementation files('libs\\umeng-share-core-6.9.6.jar')
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    //PushSDK必须依赖基础组件库，所以需要加入对应依赖
+//    api 'com.umeng.umsdk:common:2.1.0'
+    //PushSDK必须依赖utdid库，所以需要加入对应依赖
+//    implementation 'com.umeng.umsdk:utdid:1.1.5.3'
+    //PushSDK
+//    api 'com.umeng.umsdk:push:6.0.1'
+//    api  'com.umeng.umsdk:analtics:8.0.0'
+//
+//    implementation  'com.umeng.umsdk:analytics:8.0.0'
+//    implementation  'com.umeng.umsdk:common:2.0.0'
+
+
+    // 支付宝 SDK AAR 包所需的配置(小象)
+    implementation (name: 'alipaysdk-15.8.01.210112203525', ext: 'aar')
+
+    implementation "com.tencent.bugly:crashreport:$buglySdkVersion" //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation "com.tencent.bugly:nativecrashreport:$buglyNdkVersion" //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    implementation 'org.greenrobot:eventbus:3.1.1'
+}

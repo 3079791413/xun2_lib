@@ -1,0 +1,6 @@
+include ':Common'
+include ':Http'
+include ':lib_core'
+include ':XmppLibrary'
+include ':CommonLibrary'
+rootProject.name = "ImgImProgectLib"
